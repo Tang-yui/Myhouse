@@ -9,6 +9,7 @@ import { ChevronRight, LayoutDashboard, Map as MapIcon, Settings } from "lucide-
 
 export default function Home() {
   const [selectedId, setSelectedId] = useState(mockData[0].id);
+  const [activeTab, setActiveTab] = useState("dashboard");
   const selectedData = mockData.find((d) => d.id === selectedId) || mockData[0];
 
   return (
@@ -19,13 +20,22 @@ export default function Home() {
           A
         </div>
         <div className="flex flex-col gap-6">
-          <button className="p-2 text-blue-600 bg-blue-50 rounded-lg">
+          <button 
+            onClick={() => setActiveTab("dashboard")}
+            className={`p-2 rounded-lg transition-colors ${activeTab === "dashboard" ? "text-blue-600 bg-blue-50" : "text-slate-400 hover:text-blue-600 hover:bg-blue-50"}`}
+          >
             <LayoutDashboard className="w-6 h-6" />
           </button>
-          <button className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+          <button 
+            onClick={() => setActiveTab("map")}
+            className={`p-2 rounded-lg transition-colors ${activeTab === "map" ? "text-blue-600 bg-blue-50" : "text-slate-400 hover:text-blue-600 hover:bg-blue-50"}`}
+          >
             <MapIcon className="w-6 h-6" />
           </button>
-          <button className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+          <button 
+            onClick={() => setActiveTab("settings")}
+            className={`p-2 rounded-lg transition-colors ${activeTab === "settings" ? "text-blue-600 bg-blue-50" : "text-slate-400 hover:text-blue-600 hover:bg-blue-50"}`}
+          >
             <Settings className="w-6 h-6" />
           </button>
         </div>
@@ -48,10 +58,16 @@ export default function Home() {
             <span className="font-semibold text-gray-700">{selectedData.name}</span>
           </div>
           <div className="flex gap-3">
-            <button className="px-4 py-2 text-xs font-bold text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+            <button 
+              onClick={() => alert("리포트 다운로드를 시작합니다.")}
+              className="px-4 py-2 text-xs font-bold text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+            >
               리포트 다운로드 (PDF)
             </button>
-            <button className="px-4 py-2 text-xs font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors shadow-sm">
+            <button 
+              onClick={() => alert("상세 분석 요청이 접수되었습니다.")}
+              className="px-4 py-2 text-xs font-bold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+            >
               상세 분석 요청
             </button>
           </div>
